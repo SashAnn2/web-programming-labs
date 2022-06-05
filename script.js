@@ -1,4 +1,10 @@
-
+let products = [
+    {image: '1.jpg', name: 'Гель-пенка', price: 1000, info: 'Тщательно смывает остатки макияжа!',}, 
+    {image: '2.jpg', name: 'Тоник "Абсолютная нежность"', price: 1200, info: 'Отлично увлажняет лицо!',},
+    {image: '3.jpg', name: 'Успокаивающий тоник для лица и глаз', price: 850, info: 'Хороший тоник для лица и глаз!',},
+    {image: '4.jpg', name: 'Мицеллярная вода', price: 459, info: 'Отлично смывает весь макияж!',},
+    {image: '5.jpg', name: 'Солнцезащитное молочко', price: 823, info: 'Защищает от солнца на 100%!',},
+];
 
 function showModal(messageText, buttonText) {
     let modal = document.getElementsByClassName ('modal')[0];
@@ -27,7 +33,7 @@ function hideModal() {
     setTimeout(function() {
         overlay.style.visibility = 'hidden';
     }, 200);
-    modal.style.opacity = '0';
+    overlay.style.opacity = '0';
 }
 function notReadyAlert(event) {
     showModal('Sorry, not ready yen!<br>Извините, еще не готово!', 'Эх, жаль');
@@ -36,31 +42,22 @@ function notReadyAlert(event) {
 }
 
 function search() {
-    let name = document.getElementById('search').value;
-    let productNumber = null;
-    if (name == 'Гель-пенка') {
-        productNumber = 0;
-    } else if (name == 'Тоник нежность') {
-        productNumber = 1;
-    } else if (name == 'Успокаивающий тоник') {
-        productNumber = 2;
-    } else if (name == 'Мицеллярная вода') {
-        productNumber = 3;
-    } else if (name == 'Молочко') {
-        productNumber = 4;      
-    } else {
-        alert('Товар не найден');
-    }
-    
     let cards = document.getElementsByClassName('card');
-    let card = cards[productNumber];
-    card.style.border = '1px dashed red';
-    card.style.backgroundColor = 'yellow';
+    let name = document.getElementById('search').value;
+    let nameRegExp = new RegExp(name, 'i');
+    for(let i=0; i<products.length; i++) {
+        let product = products[i];
+        if(nameRegExp.test(product.name)) {
+            let card = cards[i];
+            card.style.border = '1px dashed red';
+            card.style.backgroundColor = 'yellow';
 
-    setTimeout(function() {
+        setTimeout(function() {
         card.style.border = 'none';
         card.style.backgroundColor = '';
     }, 2000);
+}
+    }
 }
 
 function generateMenu() {
@@ -77,7 +74,7 @@ function generateMenu() {
 
     for(let i=0; i<items.length; i++) {
         let link = document.createElement('a');
-        link.innetText = items[i].text;
+        link.innerText = items[i].text;
         link.href = items[i].href;
         if(items[i].href == '') {
             link.addEventListener('click', notReadyAlert);
@@ -90,14 +87,17 @@ function generateMenu() {
     }
 }
 
+function showProductInfo(product) {
+    showModal(`
+        <div><img src="${product.image}"></div>
+        <div>${product.name}</div>
+        <div>${product.price} &#8381;</div>
+        <div><i>${product.info}</i></div>
+    `);
+}
+
 function generateCards() {
-    let products = [
-        {image: '1.jpg', name: 'Гель-пенка', price: 1000},
-        {image: '2.jpg', name: 'Тоник "Абсолютная нежность"', price: 1200},
-        {image: '3.jpg', name: 'Успокаивающий тоник для лица и глаз', price: 850},
-        {image: '4.jpg', name: 'Мицеллярная вода', price: 459},
-        {image: '5.jpg', name: 'Солнцезащитное молочко', price: 823},
-    ];
+    
 
     let main = document.querySelector('main');
     for(let product of products) {
@@ -105,13 +105,16 @@ function generateCards() {
         cardDiv.className = 'card';
         cardDiv.innerHTML = `
 
-        <a href="#">
-        <div class="image"><img src="${product.image}"></div>
-        <div class="product-name">${product.name}</div>
-        <div class="price">${product.price} &#8381;</div>
-        </a>
+            <a href="#">
+                <div class="image"><img src="${product.image}"></div>
+                <div class="product-name">${product.name}</div>
+                <div class="price">${product.price} &#8381;</div>
+            </a>
 
         `;
+        cardDiv.querySelector('a').addEventListener('click', function() {
+            showProductInfo(product);
+        });
         main.append(cardDiv);
     }
 }
