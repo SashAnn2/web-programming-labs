@@ -1,36 +1,76 @@
-<!doctype html>
-<html lang="ru">
-    <head>
-        <meta charset="utf-8">
+<!doctype html> 
+<html lang="ru"> 
+    <head> 
+        <meta charset="utf-8"> 
         <title>Кочетыгова Шадапова. Лабораторные по курсу "Интернет-программирование"</title>
-    </head>
+        <link rel="stylesheet" href="main.css">
+        <script src="script.js"></script>
+    </head> 
+ 
+    <body onload="loaded()"> 
+        <header> 
+            <div class="info">Телефон: 15-16-32</div> 
+            <h1>Маркет. Уходовая косметика</h1> 
+        </header> 
+ 
+        <nav class="main-menu"> 
+            <ul> 
+                <li><a href="index.html">Товары</a></li> 
+                <li><a href="contacts.html" onclick=" return notReadyAlert()">Контакты</a></li> 
+                <li><a href="delivery.html" onclick="return notReadyAlert()">Доставка</a></li> 
+                <li><a href="promotions.html" onclick="return notReadyAlert()">Акции</a></li> 
+            </ul> 
+            <div class="searchbox"> 
+                <input type="search" placeholder="поиск по товарам" id="search"> 
+                <button onclick="search()">&#x1F50E;</button> 
+            </div> 
+        </nav> 
 
-    <body>
-        <h1>Маркет. Уходовая косметика</h1>
+        <main>
+            <div class="card"> 
+                <a href="product1.html"> 
+                    <div class="image"><img src="1.jpg"></div> 
+                    <div class="product-name">Гель-пенка для лица "Основной уход"</div> 
+                    <div class="price">1000 &#8381;</div> 
+                </a> 
+            </div> 
+            <div class="card"> 
+                <a href="product2.html"> 
+                    <div class="image"><img src="2.jpg"></div> 
+                    <div class="product-name">Тоник "Абсолютная нежность"</div> 
+                    <div class="price">1200 &#8381;</div> 
+                </a> 
+            </div> 
+            <div class="card"> 
+                <a href="product3.html"> 
+                    <div class="image"><img src="3.jpg"></div> 
+                    <div class="product-name">Успокивающий тоник</div> 
+                    <div class="price">850 &#8381;</div> 
+                </a> 
+            </div> 
+            <div class="card"> 
+                <a href="product4.html"> 
+                    <div class="image"><img src="4.jpg"></div> 
+                    <div class="product-name">Мицеллярная вода</div> 
+                    <div class="price">459 &#8381;</div> 
+                </a> 
+            </div>  
+            <div class="card"> 
+                <a href="product5.html"> 
+                    <div class="image"><img src="5.jpg"></div> 
+                    <div class="product-name">Солнцезащитное молочко</div> 
+                    <div class="price">823 &#8381;</div> 
+                </a> 
+        </main>
+ 
+        <footer> 
+            &copy; Магазин лучшей косметики в мире, 2020.  
+        </footer> 
 
-        <d1>
-            <dt>Гель-пенка для лица "Основной уход"</dt>
-            <dd>
-                <img src="1.jpg" width="300"><br>
-                Очищающий уход для нормальной и смешанной кожи, 200мл!<br>
-                Цена: 1000 &#8381;
-            </dd>
-        </d1>
-        <d1>
-            <dt>Тоник "Абсолютная нежность"</dt>
-            <dd>
-                <img src="2.jpg" width="300"><br>
-                Очищающий тоник для сухой и чувствительной кожи, 200мл!<br>
-                Цена: 1200 &#8381;
-            </dd>
-        </d1>
-        <d1>
-            <dt>Успокаивающий тоник для лица и глаз</dt>
-            <dd>
-                <img src="3.jpg" width="300"><br>
-                Эффективно удаляет макияж, успокаивает и защищает кожу!<br>
-                Цена: 850 &#8381;
-            </dd>
-        </d1>
-    </body>
+        <div class="overlay" onclick="hideModal()"></div>
+        <div class="modal">
+            <div class="message"></div>
+            <button onclick="hideModal()"></button>
+        </div>
+    </body> 
 </html>
