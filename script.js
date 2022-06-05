@@ -6,6 +6,24 @@ let products = [
     {image: '5.jpg', name: 'Солнцезащитное молочко', price: 823, info: 'Защищает от солнца на 100%!',},
 ];
 
+function addToCart(productNum, productCount) {
+    productCount = parseInt(productCount);
+    if(products[productNum].countInCart == undefined)
+    products[productNum].countInCart = productCount;
+    else
+    products[productNum].countInCart += productCount;
+
+    let cartProductCount = 0;
+    for(let i =0; i<products.length; i++) {
+        if(products[i].countInCart !== undefined)
+        cartProductCount += products[i].countInCart;
+    }
+
+    let count = document.getElementById('product-count');
+    count.innerText = cartProductCount;
+    count.style.display = 'inline';
+}
+
 function showModal(messageText, buttonText) {
     let modal = document.getElementsByClassName ('modal')[0];
     modal.style.visibility = 'visible';
@@ -117,7 +135,9 @@ function generateCards() {
 
         `;
         cardDiv.querySelector('button').addEventListener('click', function(e) {
-            alert('пока в разработке');
+            let input = e.target.previousElementSibling;
+            let count = input.value;
+            addToCart(i, count);
             return false;
         });
         cardDiv.querySelector('a').addEventListener('click', function() {
