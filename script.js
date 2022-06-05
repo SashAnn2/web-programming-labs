@@ -90,6 +90,32 @@ function generateMenu() {
     }
 }
 
+function generateCards() {
+    let products = [
+        {image: '1.jpg', name: 'Гель-пенка', price: 1000},
+        {image: '2.jpg', name: 'Тоник "Абсолютная нежность"', price: 1200},
+        {image: '3.jpg', name: 'Успокаивающий тоник для лица и глаз', price: 850},
+        {image: '4.jpg', name: 'Мицеллярная вода', price: 459},
+        {image: '5.jpg', name: 'Солнцезащитное молочко', price: 823},
+    ];
+
+    let main = document.querySelector('main');
+    for(let product of products) {
+        let cardDiv = document.createElement('div');
+        cardDiv.className = 'card';
+        cardDiv.innerHTML = `
+
+        <a href="#">
+        <div class="image"><img src="${product.image}"></div>
+        <div class="product-name">${product.name}</div>
+        <div class="price">${product.price} &#8381;</div>
+        </a>
+
+        `;
+        main.append(cardDiv);
+    }
+}
+
 function loaded() {
     let searchbox = document.getElementById('search');
     searchbox.addEventListener('keydown', function (key) {
@@ -98,4 +124,5 @@ function loaded() {
     });
 
     generateMenu();
+    generateCards();
 }
